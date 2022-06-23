@@ -76,7 +76,7 @@ func TestEnsureRemoveAllWithMount(t *testing.T) {
 	}
 
 	if err := unix.Mount(dir2, bindDir, "none", unix.MS_BIND, ""); err != nil {
-		t.Fatal(err)
+		
 	}
 
 	done := make(chan struct{})
