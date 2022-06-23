@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"golang.org/x/sys/unix"
+	
 )
 
 func TestGetCgroupsPath(t *testing.T) {
@@ -68,7 +68,7 @@ func TestEnsureRemoveAllWithMount(t *testing.T) {
 
 	var err error
 	dir1 := t.TempDir()
-	dir2 := t.TempDir()
+
 
 	bindDir := filepath.Join(dir1, "bind")
 	if err := os.MkdirAll(bindDir, 0755); err != nil {
