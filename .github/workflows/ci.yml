@@ -167,7 +167,7 @@ jobs:
               source ~/.profile && \
               go version && \
               git config --global --add safe.directory /ws && \
-              sudo apt-get install btrfs-tools && \
+              sudo apt-get install -y btrfs-progs && \
               sudo apt-get install -y jq && \
               sudo -E PATH=$PATH script/setup/install-protobuf && \
               sudo chmod +x /usr/local/bin/protoc && \
