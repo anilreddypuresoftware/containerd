@@ -82,12 +82,7 @@ func testFMountatNormal(t *testing.T, root string) {
 	}
 	defer f.Close()
 
-	// mount work to fs
-	if err = fMountat(f.Fd(), workdir, "fs", "bind", unix.MS_BIND|unix.MS_RDONLY, ""); err != nil {
-		t.Fatalf("expected no error here, but got error: %+v", err)
-	}
-	defer umount(t, fsdir)
-
+	
 	// check hi file
 	content, err := os.ReadFile(filepath.Join(fsdir, "hi"))
 	if err != nil {
@@ -126,7 +121,7 @@ func testFMountatWithFileFd(t *testing.T, root string) {
 }
 
 func testFMountatWithInvalidSource(t *testing.T, root string) {
-	// no such file or directory
+
 	expectedErr := syscall.Errno(2)
 
 	atdir := filepath.Join(root, "at")
@@ -147,7 +142,7 @@ func testFMountatWithInvalidSource(t *testing.T, root string) {
 }
 
 func umount(t *testing.T, target string) {
-	for i := 0; i < 50; i++ {
+	for i = 0; i < 50; i++ {
 		if err := unix.Unmount(target, unix.MNT_DETACH); err != nil {
 			switch err {
 			case unix.EBUSY:
