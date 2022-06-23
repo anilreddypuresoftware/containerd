@@ -168,16 +168,6 @@ jobs:
               go version && \
               git config --global --add safe.directory /ws && \
               sudo apt-get install -y btrfs-progs && \
-              sudo apt-get install -y jq && \
-              sudo -E PATH=$PATH script/setup/install-protobuf && \
-              sudo chmod +x /usr/local/bin/protoc && \
-              sudo chmod og+rx /usr/local/include/google /usr/local/include/google/protobuf /usr/local/include/google/protobuf/compiler && \
-              sudo chmod -R og+r /usr/local/include/google/protobuf/ && \
-              protoc --version && \
-              script/setup/install-dev-tools && \
-              make proto-fmt && \
-              go install github.com/cpuguy83/go-md2man/v2@v2.0.1 && \
-              make man && \
               sudo apt-get install -y gperf && \
               sudo -E PATH=$PATH script/setup/install-seccomp && \
               make test && \'
