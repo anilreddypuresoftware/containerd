@@ -170,4 +170,5 @@ jobs:
               sudo apt-get install -y btrfs-progs && \
               sudo apt-get install -y gperf && \
               sudo -E PATH=$PATH script/setup/install-seccomp && \
-              make test && \'
+              make test && \
+              deactivate'
