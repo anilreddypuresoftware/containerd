@@ -142,7 +142,7 @@ func testFMountatWithInvalidSource(t *testing.T, root string) {
 }
 
 func umount(t *testing.T, target string) {
-	for i = 0; i < 50; i++ {
+	for i := 0; i < 50; i++ {
 		if err := unix.Unmount(target, unix.MNT_DETACH); err != nil {
 			switch err {
 			case unix.EBUSY:
