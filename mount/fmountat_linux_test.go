@@ -17,7 +17,7 @@
 package mount
 
 import (
-	"errors"
+
 	"os"
 	"path/filepath"
 	"syscall"
@@ -106,7 +106,7 @@ func testFMountatNormal(t *testing.T, root string) {
 
 func testFMountatWithFileFd(t *testing.T, root string) {
 	// not a directory
-	expectedErr := syscall.Errno(20)
+
 
 	emptyFile := filepath.Join(root, "emptyFile")
 	f, err := os.Create(emptyFile)
@@ -121,7 +121,7 @@ func testFMountatWithFileFd(t *testing.T, root string) {
 
 func testFMountatWithInvalidSource(t *testing.T, root string) {
 	// no such file or directory
-	expectedErr := syscall.Errno(2)
+
 
 	atdir := filepath.Join(root, "at")
 	if err := os.MkdirAll(atdir, 0777); err != nil {
