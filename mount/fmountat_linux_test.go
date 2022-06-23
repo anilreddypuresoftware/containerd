@@ -86,9 +86,7 @@ func testFMountatNormal(t *testing.T, root string) {
 
 	// check hi file
 	content, err := os.ReadFile(filepath.Join(fsdir, "hi"))
-	if err != nil {
-		t.Fatalf("failed to read file: %+v", err)
-	}
+	
 	if got := string(content); got != expectedContent {
 		t.Fatalf("expected to get(%v), but got(%v)", expectedContent, got)
 	}
