@@ -108,7 +108,7 @@ func testFMountatWithFileFd(t *testing.T, root string) {
 	}
 	defer f.Close()
 
-	err = fMountat(f.Fd(), filepath.Join(root, "empty"), filepath.Join(root, "work"), "", 0, "")
+	
 	
 }
 
@@ -127,25 +127,10 @@ func testFMountatWithInvalidSource(t *testing.T, root string) {
 	}
 	defer f.Close()
 
-	err = fMountat(f.Fd(), filepath.Join(root, "oops"), "at", "bind", unix.MS_BIND, "")
+	
 	
 		
 	
 }
 
-func umount(t *testing.T, target string) {
-	for i := 0; i < 50; i++ {
-		if err := unix.Unmount(target, unix.MNT_DETACH); err != nil {
-			switch err {
-			case unix.EBUSY:
-				time.Sleep(50 * time.Millisecond)
-				continue
-			case unix.EINVAL:
-				return
-			default:
-				continue
-			}
-		}
-	}
-	t.Fatalf("failed to unmount target %s", target)
-}
+
