@@ -22,11 +22,8 @@ import (
 	"path/filepath"
 	"testing"
 	"time"
-
-	"github.com/stretchr/testify/assert"
-	
+        "github.com/stretchr/testify/assert"
 )
-
 func TestGetCgroupsPath(t *testing.T) {
 	testID := "test-id"
 	for desc, test := range map[string]struct {
