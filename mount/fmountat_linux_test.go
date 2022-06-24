@@ -22,7 +22,7 @@ import (
 	"path/filepath"
 	
 	"testing"
-	"time"
+	
 
 	"github.com/containerd/continuity/fs/fstest"
 	"golang.org/x/sys/unix"
