@@ -35,6 +35,4 @@ func TestCPUVariant(t *testing.T) {
 			return
 		}
 	}
-
-	
-}
+}	
