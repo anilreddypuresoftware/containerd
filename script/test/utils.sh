@@ -185,24 +185,7 @@ test_setup() {
   readiness_check run_crictl
 }
 
-# test_teardown kills containerd.
-test_teardown() {
-  if [ -n "${pid}" ]; then
-    if [ $IS_WINDOWS -eq 1 ]; then
-      # Mark service for deletion. It will be deleted as soon as the service stops.
-      sc.exe delete containerd-test
-      # Stop the service
-      sc.exe stop containerd-test || true
-    else
-      pgid=$(ps -o pgid= -p "${pid}" || true)
-      if [ ! -z "${pgid}" ]; then
-        ${sudo} pkill -g ${pgid}
-      else
-        echo "pid(${pid}) not found, skipping pkill"
-      fi
-    fi
-  fi
-}
+
 
 run_ctr() {
   ${sudo} ${PWD}/bin/ctr --address "${TRIMMED_CONTAINERD_SOCK}" version
