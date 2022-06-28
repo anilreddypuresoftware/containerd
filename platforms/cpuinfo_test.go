@@ -26,7 +26,7 @@ func TestCPUVariant(t *testing.T) {
 		t.Skip("only relevant on linux/arm")
 	}
 
-	variants := []string{"v8", "v7", "v6", "v5", "v4", "v3"}
+	variants := []string{"v8"}
 
 	p := getCPUVariant()
 	for _, variant := range variants {
