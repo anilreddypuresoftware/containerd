@@ -17,12 +17,12 @@
 package mount
 
 import (
-
+	"errors"
 	"os"
 	"path/filepath"
-	
+	"syscall"
 	"testing"
-	
+	"time"
 
 	"github.com/containerd/continuity/fs/fstest"
 	"golang.org/x/sys/unix"
@@ -82,9 +82,20 @@ func testFMountatNormal(t *testing.T, root string) {
 	}
 	defer f.Close()
 
-	
+	// mount work to fs
+	if err = fMountat(f.Fd(), workdir, "fs", "bind", unix.MS_BIND|unix.MS_RDONLY, ""); err != nil {
+		t.Fatalf("expected no error here, but got error: %+v", err)
+	}
+	defer umount(t, fsdir)
 
-	
+	// check hi file
+	content, err := os.ReadFile(filepath.Join(fsdir, "hi"))
+	if err != nil {
+		t.Fatalf("failed to read file: %+v", err)
+	}
+	if got := string(content); got != expectedContent {
+		t.Fatalf("expected to get(%v), but got(%v)", expectedContent, got)
+	}
 
 	// check the working directory
 	cwd, err := os.Getwd()
@@ -99,7 +110,7 @@ func testFMountatNormal(t *testing.T, root string) {
 
 func testFMountatWithFileFd(t *testing.T, root string) {
 	// not a directory
-
+	expectedErr := syscall.Errno(20)
 
 	emptyFile := filepath.Join(root, "emptyFile")
 	f, err := os.Create(emptyFile)
@@ -108,13 +119,15 @@ func testFMountatWithFileFd(t *testing.T, root string) {
 	}
 	defer f.Close()
 
-	
-	
+	err = fMountat(f.Fd(), filepath.Join(root, "empty"), filepath.Join(root, "work"), "", 0, "")
+	if !errors.Is(err, expectedErr) {
+		t.Fatalf("expected error %v, but got %v", expectedErr, errors.Unwrap(err))
+	}
 }
 
 func testFMountatWithInvalidSource(t *testing.T, root string) {
 	// no such file or directory
-
+	expectedErr := syscall.Errno(2)
 
 	atdir := filepath.Join(root, "at")
 	if err := os.MkdirAll(atdir, 0777); err != nil {
@@ -127,10 +140,26 @@ func testFMountatWithInvalidSource(t *testing.T, root string) {
 	}
 	defer f.Close()
 
-	
-	
-		
-	
+	err = fMountat(f.Fd(), filepath.Join(root, "oops"), "at", "bind", unix.MS_BIND, "")
+	if !errors.Is(err, expectedErr) {
+		t.Fatalf("expected error %v, but got %v", expectedErr, err)
+	}
 }
 
+func umount(t *testing.T, target string) {
+	for i := 0; i < 50; i++ {
+		if err := unix.Unmount(target, unix.MNT_DETACH); err != nil {
+			switch err {
+			case unix.EBUSY:
+				time.Sleep(50 * time.Millisecond)
+				continue
+			case unix.EINVAL:
+				return
+			default:
+				continue
+			}
+		}
+	}
+	t.Fatalf("failed to unmount target %s", target)
+}
 
