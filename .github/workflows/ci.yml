@@ -243,4 +243,4 @@ jobs:
               sudo chmod +x ${GOSU} && \
               sudo chown root ${GOSU} && \
               sudo chmod +s ${GOSU} && \
-              make test'
+              sudo make test'
