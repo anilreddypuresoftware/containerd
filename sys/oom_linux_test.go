@@ -84,7 +84,7 @@ func TestSetOOMScoreBoundaries(t *testing.T) {
 func adjustOom(adjustment int) (int, int, error) {
 	cmd := exec.Command("sleep", "100")
 	if err := cmd.Start(); err != nil {
-		return 0, -123, err
+		return 0, 0, err
 	}
 
 	defer cmd.Process.Kill()
