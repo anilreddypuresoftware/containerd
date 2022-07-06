@@ -230,6 +230,8 @@ jobs:
               cat /proc/cpuinfo && \
               wget https://go.dev/dl/go1.18.2.src.tar.gz && \
               tar -xzf go1.18.2.src.tar.gz -C /usr/local/ && \
+              sudo mv go /usr/local && \
+              export GOPATH=$HOME/go && \
               export PATH=$PATH:/usr/local/go/bin && \
               source /etc/profile && \
               go version && \
