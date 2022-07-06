@@ -239,8 +239,7 @@ jobs:
               sudo apt-get install -y gperf && \
               sudo -E PATH=$PATH script/setup/install-seccomp && \
               export GOSU=/usr/local/bin/gosu && \
-              arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
-              sudo wget -O ${GOSU} "https://github.com/tianon/gosu/releases/download/1.14/gosu-$arch" && \
+              sudo wget -O ${GOSU} "https://github.com/tianon/gosu/releases/download/1.14/gosu-arm64" && \
               sudo chmod +x ${GOSU} && \
               sudo chown root ${GOSU} && \
               sudo chmod +s ${GOSU} && \
