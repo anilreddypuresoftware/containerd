@@ -23,10 +23,10 @@ import (
 
 func TestCPUVariant(t *testing.T) {
 	if !isArmArch(runtime.GOARCH) || !isLinuxOS(runtime.GOOS) {
-		t.Skip("only relevant on linux/arm")
+		t.Skip("only relevant on linux/arm64")
 	}
 
-	variants := []string{"v8"}
+	variants := []string{"v7"}
 
 	p := getCPUVariant()
 	for _, variant := range variants {
