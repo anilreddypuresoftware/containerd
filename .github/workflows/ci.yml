@@ -243,5 +243,4 @@ jobs:
               sudo chmod +x ${GOSU} && \
               sudo chown root ${GOSU} && \
               sudo chmod +s ${GOSU} && \
-              gosu root script/setup/install-runc && \
               make test'
