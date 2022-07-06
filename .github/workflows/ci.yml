@@ -228,12 +228,11 @@ jobs:
               arm64v8/ubuntu:18.04 \
               bash -exc 'apt-get update && apt-get -y install git sudo curl make wget git build-essential unzip && \
               cat /proc/cpuinfo && \
-              wget https://go.dev/dl/go1.18.2.linux-arm64.tar.gz && \
-              sudo tar -xvf go1.18.2.linux-arm64.tar.gz && \
+              wget https://go.dev/dl/go1.18.2.src.tar.gz && \
+              tar -xzf go1.18.2.src.tar.gz -C /usr/local/
               sudo mv go /usr/local && \
-              export GOPATH=$HOME/go && \
-              export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin && \
-              source ~/.profile && \
+              export PATH=$PATH:/usr/local/go/bin && \
+              source /etc/profile && \
               go version && \
               git config --global --add safe.directory /ws && \
               sudo apt-get install -y btrfs-progs && \
