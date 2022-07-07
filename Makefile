@@ -15,8 +15,8 @@
 
 # Go command to use for build
 wget https://go.dev/dl/go1.18.2.linux-arm64.tar.gz 
-	sudo tar -xvf go1.18.2.linux-arm64.tar.gz 
-        sudo mv go /usr/local 
+        sudo tar -xvf go1.18.2.linux-arm64.tar.gz 
+        sudo mv go /usr/local
         export GOPATH=$HOME/go 
         export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin 
         source ~/.profile 
