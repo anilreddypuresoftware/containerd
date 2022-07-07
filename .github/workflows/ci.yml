@@ -243,5 +243,6 @@ jobs:
               sudo chmod +x ${GOSU} && \
               sudo chown root ${GOSU} && \
               sudo chmod +s ${GOSU} && \
-              sudo make test && \
+              sudo -E make install && \
+              sudo -E make test && \
               deactivate'
