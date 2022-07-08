@@ -243,8 +243,4 @@ jobs:
               sudo chmod +x ${GOSU} && \
               sudo chown root ${GOSU} && \
               sudo chmod +s ${GOSU} && \
-              sudo apt-get update && \
-              sudo apt-get install -y criu && \
-              make binaries GO_BUILD_FLAGS="-mod=vendor" && \
-              sudo -E PATH=$PATH make install && \
-              sudo -E make test'
+              make test'
