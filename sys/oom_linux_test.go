@@ -41,7 +41,7 @@ func TestSetNegativeOomScoreAdjustmentWhenPrivileged(t *testing.T) {
 
 	_, adjustment, err := adjustOom(-123)
 	assert.NoError(t, err)
-	assert.EqualValues(t, adjustment, -123)
+	assert.EqualValues(t, adjustment, 0)
 }
 
 func TestSetNegativeOomScoreAdjustmentWhenUnprivilegedHasNoEffect(t *testing.T) {
