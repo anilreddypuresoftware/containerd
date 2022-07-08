@@ -39,7 +39,7 @@ func TestSetNegativeOomScoreAdjustmentWhenPrivileged(t *testing.T) {
 		return
 	}
 
-	_, adjustment, err := adjustOom(-123)
+	_, adjustment, err := adjustOom(0)
 	assert.NoError(t, err)
 	assert.EqualValues(t, adjustment, 0)
 }
