@@ -220,8 +220,8 @@ jobs:
             docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
               arm64v8/ubuntu:18.04 \
               bash -exc 'apt-get update && apt-get -y install git sudo curl make wget git build-essential unzip && \
-              wget https://go.dev/dl/go1.18.2.linux-arm64.tar.gz && \
-              sudo tar -xvf go1.18.2.linux-arm64.tar.gz && \
+              wget https://go.dev/dl/go-version.linux-aarch64.tar.gz && \
+              sudo tar -xvf go-version.linux-aarch64.tar.gz && \
               sudo mv go /usr/local && \
               export GOPATH=$HOME/go && \
               export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin && \
